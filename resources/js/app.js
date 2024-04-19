@@ -1,0 +1,2 @@
+// Arquivo Boostrap
+import './bootstrap';
