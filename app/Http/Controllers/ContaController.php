@@ -12,14 +12,23 @@ use PhpParser\Node\Stmt\TryCatch;
 class ContaController extends Controller
 {
     // Listar as contas
-    public function index()
+    public function index(Request $request)
     {
 
         // Recuperar os registros do banco dados
-        $contas = Conta::orderByDesc('created_at')->get();        
+        $contas = Conta::when($request->has('nome'), function($whenQuery) use ($request){
+            $whenQuery->where('nome', 'like', '%' . $request->nome . '%');
+        })
+        ->orderByDesc('created_at')
+        ->paginate(5)
+        ->withQueryString(); 
+        //dd($contas)  ;     
 
         // Carregar a VIEW
-        return view('contas.index', ['contas' => $contas]);
+        return view('contas.index',[
+            'contas' => $contas,
+            'nome' => $request->nome,
+        ]);
     }
 
     // Detalhes da conta
