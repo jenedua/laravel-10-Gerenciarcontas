@@ -123,6 +123,10 @@ Traduzir para o português
 ```
 https://github.com/lucascudo/laravel-pt-BR-localization
 ```
+Instalar a biblioteca para gerar pdf
+```
+composer require barryvdh/laravel-dompdf
+```
 
 
 

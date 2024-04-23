@@ -7,6 +7,7 @@ use App\Models\Conta;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Barryvdh\DomPDF\Facade\Pdf;
 use PhpParser\Node\Stmt\TryCatch;
 
 class ContaController extends Controller
@@ -19,6 +20,12 @@ class ContaController extends Controller
         $contas = Conta::when($request->has('nome'), function($whenQuery) use ($request){
             $whenQuery->where('nome', 'like', '%' . $request->nome . '%');
         })
+        ->when($request->filled('data_inicio'), function($whenQuery) use ($request){
+            $whenQuery->where('vencimento', '>=', \Carbon\Carbon::parse($request->data_inicio)->format('Y-m-d'));
+        })
+        ->when($request->filled('data_fim'), function($whenQuery) use ($request){
+            $whenQuery->where('vencimento', '<=', \Carbon\Carbon::parse($request->data_fim)->format('Y-m-d'));
+        })
         ->orderByDesc('created_at')
         ->paginate(5)
         ->withQueryString(); 
@@ -28,6 +35,8 @@ class ContaController extends Controller
         return view('contas.index',[
             'contas' => $contas,
             'nome' => $request->nome,
+            'data_inicio' => $request->data_inicio,
+            'data_fim' => $request->data_fim,
         ]);
     }
 
@@ -119,6 +128,14 @@ class ContaController extends Controller
 
         // Redirecionar o usuário, enviar a mensagem de sucesso
         return redirect()->route('conta.index')->with('success', 'Conta apagada com sucesso');
+    }
+
+    public function gerarPdf(){
+        // Recuperar os registros do banco de dados
+        $contas = Conta::orderByDesc('created_at')->get();
+        $pdf = PDF::loadView('contas.gerar-pdf', ['contas' => $contas])->setPaper('a4', 'lanscape');
+        
+        return $pdf->download('listar_contas.pdf');
     }
 
 }
