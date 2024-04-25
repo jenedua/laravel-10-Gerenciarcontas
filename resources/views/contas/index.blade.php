@@ -40,17 +40,13 @@
                 <span>Listar Contas</span>
                 <span>
                     <a href="{{ route('conta.create') }}" type="button" class="btn btn-success btn-sm">Cadastrar</a>
-                    <a href="{{ route('conta.gerar-pdf') }}" type="button" class="btn btn-warning btn-sm">Gerar PDF</a>
+                    {{-- <a href="{{ route('conta.gerar-pdf') }}" type="button" class="btn btn-warning btn-sm">Gerar PDF</a> --}}
+                    {{-- {{ dd(request()->getQueryString())}} --}}
+                    <a href="{{ url('gerar-pdf-conta?'. request()->getQueryString()) }}" class="btn btn-warning btn-sm">Gerar PDF</a>
                 </span>
             </div>
             {{-- Verificar se existe a sessão success e imprimir o valor --}}
-            @if (session('success'))
-            <div class="alert alert-success m-3" role="alert">
-                <p>
-                    {{ session('success') }}
-                </p>
-              </div>
-            @endif
+            <x-alert />
             <div class="card-body">
                 <table class="table">
                     <thead>

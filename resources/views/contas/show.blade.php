@@ -15,13 +15,7 @@
                 </span>
             </div>
             {{-- Verificar se existe a sessão success e imprimir o valor --}}
-            @if (session('success'))
-            <div class="alert alert-success m-3" role="alert">
-                <p>
-                    {{ session('success') }}
-                </p>
-              </div>
-            @endif
+            <x-alert />
             <div class="card-body">
                 <dl class="row">
                     <dt class="col-sm-3">ID</dt>

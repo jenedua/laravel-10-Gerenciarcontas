@@ -11,25 +11,15 @@
                     </a>
                 </span>
             </div>
-            {{-- Verificar se existe a sessão success e imprimir o valor --}}
-            @if (session('success'))
-            <div class="alert alert-success m-3" role="alert">
-                    {{ session('success') }}
-              </div>
-            @endif
+            {{-- Verificar se existe a sessão  e imprimir o valor --}}
+            <x-alert />
 
             @if (session('error'))
                 <div class="alert alert-danger m-3" role="alert">
                         {{ session('error') }}
                 </div>
             @endif
-            @if($errors->any())
-                <div class="alert alert-danger m-3" role="alert">
-                    @foreach ($errors->all() as $error)
-                        {{ $error }}<br>
-                    @endforeach
-                </div>
-            @endif
+            
             <div class="card-body">
                 <form action="{{ route('conta.store') }}" method="POST" class="row g-3">
                     @csrf

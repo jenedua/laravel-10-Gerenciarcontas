@@ -127,6 +127,10 @@ Instalar a biblioteca para gerar pdf
 ```
 composer require barryvdh/laravel-dompdf
 ```
+Intallar o sweetalert2
+```
+npm install sweetalert2
+```
 
 
 

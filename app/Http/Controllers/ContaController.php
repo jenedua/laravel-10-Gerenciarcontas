@@ -27,7 +27,7 @@ class ContaController extends Controller
             $whenQuery->where('vencimento', '<=', \Carbon\Carbon::parse($request->data_fim)->format('Y-m-d'));
         })
         ->orderByDesc('created_at')
-        ->paginate(5)
+        ->paginate(10)
         ->withQueryString(); 
         //dd($contas)  ;     
 
@@ -130,10 +130,28 @@ class ContaController extends Controller
         return redirect()->route('conta.index')->with('success', 'Conta apagada com sucesso');
     }
 
-    public function gerarPdf(){
+    public function gerarPdf(Request $request){
         // Recuperar os registros do banco de dados
-        $contas = Conta::orderByDesc('created_at')->get();
-        $pdf = PDF::loadView('contas.gerar-pdf', ['contas' => $contas])->setPaper('a4', 'lanscape');
+        //$contas = Conta::orderByDesc('created_at')->get();
+        $contas = Conta::when($request->has('nome'), function($whenQuery) use ($request){
+            $whenQuery->where('nome', 'like', '%' . $request->nome . '%');
+        })
+        ->when($request->filled('data_inicio'), function($whenQuery) use ($request){
+            $whenQuery->where('vencimento', '>=', \Carbon\Carbon::parse($request->data_inicio)->format('Y-m-d'));
+        })
+        ->when($request->filled('data_fim'), function($whenQuery) use ($request){
+            $whenQuery->where('vencimento', '<=', \Carbon\Carbon::parse($request->data_fim)->format('Y-m-d'));
+        })
+        ->orderByDesc('created_at')
+        ->get();
+
+         $totalValor = $contas->sum('valor');
+       
+        $pdf = PDF::loadView('contas.gerar-pdf', 
+        [
+            'contas' => $contas,
+            'totalValor' => $totalValor
+            ])->setPaper('a4', 'lanscape');
         
         return $pdf->download('listar_contas.pdf');
     }
