@@ -30,6 +30,9 @@
                     <dt class="col-sm-3">Vencimento</dt>
                     <dd class="col-sm-9">{{ \Carbon\Carbon::parse($conta->vencimento)->tz('America/Sao_Paulo')->format('d/m/Y') }}</dd>
 
+                    <dt class="col-sm-3">Situação</dt>
+                    <dd class="col-sm-9">{!! '<span class="badge text-bg-'. $conta->situacaoConta->cor .'">'. $conta->situacaoConta->nome .'</span>' !!}</dd>
+
                     <dt class="col-sm-3">Cadastrado</dt>
                     <dd class="col-sm-9">{{ \Carbon\Carbon::parse($conta->created_at)->tz('America/Sao_Paulo')->format('d/m/Y H:i:s') }}</dd>
 
