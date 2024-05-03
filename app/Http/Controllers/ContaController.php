@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ContaRequest;
 use App\Models\Conta;
+use App\Models\SituacaoConta;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -28,7 +29,7 @@ class ContaController extends Controller
         })
         ->with('situacaoConta')
         ->orderByDesc('created_at')
-        ->paginate(10)
+        ->paginate(2)
         ->withQueryString(); 
         //dd($contas)  ;     
 
@@ -52,8 +53,13 @@ class ContaController extends Controller
     // Carregar o formulário cadastrar nova conta
     public function create()
     {
+        // Recuperar do banco de dados as situações
+        $situacoesContas = SituacaoConta::orderBy('nome', 'asc')->get();
+
         // Carregar a VIEW
-        return view('contas.create');
+        return view('contas.create', [
+            'situacoesContas' => $situacoesContas,
+        ]);
     }
 
     // Cadastrar no banco de dados nova conta
@@ -68,7 +74,8 @@ class ContaController extends Controller
         $conta = Conta::create([
             'nome' => $request->nome,
             'valor' => str_replace(',' ,'', str_replace('.', '', $request->valor)),
-            'vencimento' => $request->vencimento
+            'vencimento' => $request->vencimento,
+            'situacao_conta_id' => $request->situacao_conta_id,
         ]);
 
         // Redirecionar o usuário, enviar a mensagem de sucesso
@@ -88,8 +95,14 @@ class ContaController extends Controller
     // Carregar o formulário editar a conta
     public function edit(Conta $conta)
     {
+        // Recuperar do banco de dados as situações
+        $situacoesContas = SituacaoConta::orderBy('nome', 'asc')->get();
+
         // Carregar a VIEW
-        return view('contas.edit', [ 'conta' => $conta]);
+        return view('contas.edit', [ 
+            'conta' => $conta,
+            'situacoesContas' => $situacoesContas,
+        ]);
     }
 
     // Editar no banco de dados a conta
@@ -105,6 +118,7 @@ class ContaController extends Controller
                 'nome' => $request->nome,
                 'valor' => str_replace(',', '.', str_replace('.', '', $request->valor)),
                 'vencimento' => $request->vencimento,
+                'situacao_conta_id' => $request->situacao_conta_id,
             ]);
 
                 Log::info('Contas editado com sucesso..' ,['id' => $conta->id]);
@@ -156,5 +170,28 @@ class ContaController extends Controller
         
         return $pdf->download('listar_contas.pdf');
     }
+
+    public function changeSituation(Conta $conta){
+        try {
+
+            //Editar as informações de registro do banco de dados
+            $conta->update([
+                'situacao_conta_id' => $conta->situacao_conta_id == 1 ? '2' :'1',
+            ]);
+
+            Log::info('Situação da Conta editada com sucesso..' ,['id' => $conta->id]);
+
+            return back()->withInput()->with('success', 'Situação da conta não editada com sucesso!');
+
+        } catch (Exception $e) {
+           Log::warning('Situação da conta não editada..', ['error' => $e->getMessage()]);
+
+            return back()->withInput()->with('error', 'Situação da conta não editada!');
+        }
+
+    }
+
+
+
 
 }

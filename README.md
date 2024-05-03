@@ -131,6 +131,18 @@ Intallar o sweetalert2
 ```
 npm install sweetalert2
 ```
+Installar select2
+```
+npm install select2
+```
+Installar jquery
+```
+npm install jquery
+```
+Installar o tema do boostrap 5 para select2
+```
+npm install select2-bootstrap-5-theme
+```
 
 
 

@@ -1,0 +1,5 @@
+/** Importar o css do select2 */
+@import 'select2/dist/css/select2.min.css';
+
+/* Importar o layout do bootstrap para select2 */
+@import 'select2-bootstrap-5-theme/dist/select2-bootstrap-5-theme.min.css';

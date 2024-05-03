@@ -62,12 +62,18 @@
                     <tbody>
                         @forelse ($contas as $conta)
                             <tr>
-                                <th>{{ $conta->id }}</th>
+                                <td>{{ $conta->id }}</td>
                                 <td>{{ $conta->nome }}</td>
                                 <td>{{ 'R$ ' . number_format($conta->valor, 2, ',', '.') }}</td>
                                 <td>{{ \Carbon\Carbon::parse($conta->vencimento)->tz('America/Sao_Paulo')->format('d/m/Y') }}
                                 </td>
-                                <td>{!! '<span class="badge text-bg-'. $conta->situacaoConta->cor .'">'. $conta->situacaoConta->nome .'</span>' !!} </td>
+
+                                <td>
+                                    <a href="{{ route('conta.change-situation', ['conta' => $conta->id])}}">
+
+                                        {!! '<span class="badge text-bg-'. $conta->situacaoConta->cor .'">'. $conta->situacaoConta->nome .'</span>' !!} 
+                                    </a>
+                                </td>
                                 <td class="d-md-flex justify-content-center">
                                     <a href="{{ route('conta.show', ['conta' => $conta->id]) }}"
                                          type="button" class="btn btn-primary btn-sm me-1">Visualizar
