@@ -43,6 +43,8 @@
                     {{-- <a href="{{ route('conta.gerar-pdf') }}" type="button" class="btn btn-warning btn-sm">Gerar PDF</a> --}}
                     {{-- {{ dd(request()->getQueryString())}} --}}
                     <a href="{{ url('gerar-pdf-conta?'. request()->getQueryString()) }}" class="btn btn-warning btn-sm">Gerar PDF</a>
+
+                    <a href="{{ url('gerar-csv-conta?'. request()->getQueryString()) }}" class="btn btn-success btn-sm">Gerar Excel</a>
                 </span>
             </div>
             {{-- Verificar se existe a sessão success e imprimir o valor --}}
