@@ -250,7 +250,7 @@ class ContaController extends Controller
 
          }
 
-         // Criar o rodape do Excel
+        
 
          $rodape = ['', '', '', '', number_format( $totalValor, 2, ',', '.')];
 
