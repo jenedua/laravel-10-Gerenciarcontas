@@ -31,8 +31,10 @@
 
                     <div class="col-md-4 col-sm-12">
                         <label for="valor" class="form-label">Valor</label>
-                        <input type="text" name="valor" class="form-control" id="valor" placeholder="Valor da conta" 
-                        value="{{ old('valor') }}">
+                        {{-- <input type="text" name="valor" class="form-control" id="valor" placeholder="Valor da conta" 
+                        value="{{ old('valor') }}"> --}}
+                        <input type="text" name="valor" class="form-control" id="valor" placeholder="Usar '.' separar real do centavo" 
+                        value="{{ old('valor', isset($conta->valor) ? number_format($conta->valor, '2', ',' , '.') : '') }}">
                     </div>
 
                     <div class="col-md-4 col-sm-12">
