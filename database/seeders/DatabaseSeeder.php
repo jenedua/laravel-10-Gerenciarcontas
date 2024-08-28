@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             SituacaoContaSeeder::class,
-            ContaSeeder::class,
+            //ContaSeeder::class,
         ]);
     }
 }

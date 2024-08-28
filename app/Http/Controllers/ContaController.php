@@ -74,7 +74,7 @@ class ContaController extends Controller
             // Cadastrar no banco de dados na tabela contas os valores de todos os campos
         $conta = Conta::create([
             'nome' => $request->nome,
-            'valor' => str_replace(',' ,'', str_replace('.', '', $request->valor)),
+            'valor' => str_replace(',' ,'.', str_replace('.', '', $request->valor)),
             'vencimento' => $request->vencimento,
             'situacao_conta_id' => $request->situacao_conta_id,
         ]);
