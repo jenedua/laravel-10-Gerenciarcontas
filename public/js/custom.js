@@ -1,4 +1,4 @@
-const { error } = require("jquery");
+//const { error } = require("jquery");
 
 // Adiciona um listener para executar o código quando o DOM estiver totalmente carregado
  document.addEventListener('DOMContentLoaded', function (){
@@ -29,7 +29,11 @@ const { error } = require("jquery");
             .then(data => {
                 //Verifica se a resposta indica sucesso
                 if(data.status == 'success'){
-                    
+                    // seleciona o elemento HTML com o ID 'quantidadeUsuarioOnlineLogado'
+                     var quantidadeElement = document.getElementById('quantidadeUsuarioOnlineLogado')
+                     // Atualiza o texto do elemento com o numero de usuarios ativos obtivos da resposta
+                     quantidadeElement.textContent = data.activeUsers
+
 
                 }else{
                     // Loga um error no console se a atualização falhar
@@ -41,7 +45,9 @@ const { error } = require("jquery");
             .catch(error => console.error('Error: ', error)); //Loga um erro no console se a requisição falhar
             console.log(csrfToken);
 
-        }, 10000) // Define o intervalo de tempo - 10000 = 10 segundo ou pode colocar 300000 ms = 5 minutos
+            //}, 10000); // Define o intervalo de tempo - 10000 = 10 segundo ou pode colocar 300000 ms = 5 minutos
+             //}, 300000); // 300000 ms = 5 minutes
+        }, 180000); //180000 ms = 3 minutes
     }
 
  })

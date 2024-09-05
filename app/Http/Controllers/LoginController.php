@@ -53,7 +53,7 @@ class LoginController extends Controller
 
             // Conta o numero de usuarios ativos nos ultimos 1 minuto
             $activeUsers = User::where('last_active_at' , '>=', Carbon::now()
-                ->subMinutes(1))->count();
+                ->subMinutes(5))->count();
             
             // Retorna uma resposta JSON com status de sucesso e o numero de usuarios activos 
             return response()->json(['status' => 'success', 'activeUsers' => $activeUsers]);

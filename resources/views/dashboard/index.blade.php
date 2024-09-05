@@ -13,7 +13,7 @@
 
         <h1>Projeto Laravel Dashboard</h1>
          
-        <p>Quantidade de usuario online logado: <span id="quantidadeUsuarioOnlineLogado">{{$activeUsers}}</span> </p>
+        <p>Quantidade de usuario online logado: <span id="quantidadeUsuarioOnlineLogado">{{$activeUsers}}</span></p>
         {{-- <a href="{{ route('conta.index') }}">Listar as Contas</a> --}}
         <a href="{{ route('login.destroy')}}">Sair</a>
 

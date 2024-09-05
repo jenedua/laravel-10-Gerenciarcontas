@@ -28,5 +28,12 @@ class UsersSeeder extends Seeder
                 'password' => Hash::make('123456a', ['rounds' => 12])
             ]);
         }
+        if(!User::where('email', 'dabady@gmail.com')->first()){
+            User::create([
+                'name' => 'Dabady',
+                'email' => 'dabady@gmail.com',
+                'password' => Hash::make('123456a', ['rounds' => 12])
+            ]);
+        }
     }
 }
