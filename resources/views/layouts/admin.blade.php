@@ -37,7 +37,7 @@
             </ul>
     
             <div class="text-end">
-              <button type="button" class="btn btn-warning">Login</button>
+              <a type="button" href="{{ route('login.destroy') }}" class="btn btn-warning">Sair</a>
             </div>
           </div>
         </div>
