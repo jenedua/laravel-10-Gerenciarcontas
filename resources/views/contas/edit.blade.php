@@ -39,6 +39,10 @@
                         value="{{ old('valor', isset($conta->valor) ? number_format($conta->valor, '2', ',' , '.') : '') }}">
                     </div>
                     <div class="col-md-4 col-sm-12">
+                        <label for="vencimento" class="form-label">Fechamento</label>
+                        <input type="date" name="fechamento" class="form-control" id="fechamento" value="{{ old('fechamento', $conta->fechamento) }}">
+                    </div>
+                    <div class="col-md-4 col-sm-12">
                         <label for="vencimento" class="form-label">Vencimento</label>
                         <input type="date" name="vencimento" class="form-control" id="vencimento" value="{{ old('vencimento', $conta->vencimento) }}">
                     </div>

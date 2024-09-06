@@ -56,6 +56,7 @@
                             <th scope="col">ID</th>
                             <th scope="col">Nome</th>
                             <th scope="col">Valor</th>
+                            <th scope="col">Fechamento</th>
                             <th scope="col">Vencimento</th>
                             <th scope="col">Situação</th>
                             <th scope="col" class="text-center">Ações</th>
@@ -67,6 +68,7 @@
                                 <td>{{ $conta->id }}</td>
                                 <td>{{ $conta->nome }}</td>
                                 <td>{{ 'R$ ' . number_format($conta->valor, 2, ',', '.') }}</td>
+                                <td>{{ \Carbon\Carbon::parse($conta->fechamento)->tz('America/Sao_Paulo')->format('d/m/Y') }}
                                 <td>{{ \Carbon\Carbon::parse($conta->vencimento)->tz('America/Sao_Paulo')->format('d/m/Y') }}
                                 </td>
 

@@ -76,6 +76,7 @@ class ContaController extends Controller
             'nome' => $request->nome,
             'valor' => str_replace(',' ,'.', str_replace('.', '', $request->valor)),
             'vencimento' => $request->vencimento,
+            'fechamento' => $request->fechamento,
             'situacao_conta_id' => $request->situacao_conta_id,
         ]);
 
@@ -118,6 +119,7 @@ class ContaController extends Controller
             $conta->update([
                 'nome' => $request->nome,
                 'valor' => str_replace(',', '.', str_replace('.', '', $request->valor)),
+                'fechamento' => $request->fechamento,
                 'vencimento' => $request->vencimento,
                 'situacao_conta_id' => $request->situacao_conta_id,
             ]);

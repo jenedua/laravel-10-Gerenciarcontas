@@ -24,10 +24,11 @@
                 <form action="{{ route('conta.store') }}" method="POST" class="row g-3">
                     @csrf
 
-                    <div class="col-md-12 col-sm-12">
+                    <div class="col-md-4 col-sm-12">
                         <label for="nome" class="form-label">Nome</label>
                         <input type="text" name="nome" class="form-control" id="nome" placeholder="Nome da conta" value="{{ old('nome') }}">
                     </div>
+                    
 
                     <div class="col-md-4 col-sm-12">
                         <label for="valor" class="form-label">Valor</label>
@@ -35,6 +36,11 @@
                         value="{{ old('valor') }}"> --}}
                         <input type="text" name="valor" class="form-control" id="valor" placeholder="Usar '.' separar real do centavo" 
                         value="{{ old('valor', isset($conta->valor) ? number_format($conta->valor, '2', ',' , '.') : '') }}">
+                    </div>
+                    
+                    <div class="col-md-4 col-sm-12">
+                        <label for="fechamento" class="form-label">Fechamento</label>
+                        <input type="date" name="fechamento" class="form-control" id="fechamento" value="{{ old('fechamento') }}">
                     </div>
 
                     <div class="col-md-4 col-sm-12">

@@ -30,6 +30,9 @@
                     <dt class="col-sm-3">Vencimento</dt>
                     <dd class="col-sm-9">{{ \Carbon\Carbon::parse($conta->vencimento)->tz('America/Sao_Paulo')->format('d/m/Y') }}</dd>
 
+                    <dt class="col-sm-3">Fechamento</dt>
+                    <dd class="col-sm-9">{{ \Carbon\Carbon::parse($conta->fechamento)->tz('America/Sao_Paulo')->format('d/m/Y') }}</dd>
+
                     <dt class="col-sm-3">Situação</dt>
                     <dd class="col-sm-9">
                         <a href="{{ route('conta.change-situation', ['conta' => $conta->id])}}">
