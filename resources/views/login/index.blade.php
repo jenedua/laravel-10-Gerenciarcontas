@@ -19,7 +19,7 @@
                 <button type="submit">Entrar</button>
             </form>
             <div class="forgot-password">
-                <a href="#">Esqueceu sua senha?</a>
+                <a href="{{route('user.create')}}" type="button">cadastrar-se</a>
             </div>
         </div>
         {{-- <form action="{{route('login.process')}}" method="POST">

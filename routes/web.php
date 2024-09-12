@@ -3,6 +3,7 @@
 use App\Http\Controllers\ContaController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,11 +24,17 @@ Route::get('/', [LoginController::class, 'index'])->name('login.index');
 Route::post('/login', [LoginController::class, 'loginProcess'])->name('login.process');
 Route::get('/logout',[LoginController::class, 'destroy'])->name('login.destroy');
 
+
+Route::get('/list-user', [UserController::class,'list'])->name('user.list');
+Route::get('/create-user', [UserController::class,'create'])->name('user.create');
+Route::post('/store-user', [UserController::class, 'store'])->name('user.store');
+
 // Atualiza horario de acesso
 Route::post('/update-last-active', [LoginController::class, 'updateLastActive']);
 
 //verificar se o usuario esta logado
 Route::group(['middleware' => 'auth'], function (){
+    
 
     //Route::get('/index-dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
     // CONTAS
