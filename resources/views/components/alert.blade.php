@@ -1,10 +1,10 @@
 @if (session()->has('success'))
-    <div class="alert alert-success m-3" role="alert">
-        <p>
+    
+        <p style="color: rgb(0, 255, 42)">
             {{ session('success') }}
         </p>
-    </div>
-    <
+    
+    
     <script>
         document.addEventListener('DOMContentLoaded', () =>{
             swal.fire('Pronto!', "{{session('success')}}", 'success');

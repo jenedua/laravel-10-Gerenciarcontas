@@ -21,6 +21,8 @@ class UserRequest extends FormRequest
      */
     public function rules(): array
     {
+        $this->formatCpfInput();
+        
         $userId = $this->route('user');
 
         return [
@@ -47,4 +49,13 @@ class UserRequest extends FormRequest
         ];
 
     }
+    
+    protected function formatCpfInput(){
+        $cpf = $this->input('cpf');
+        $this->merge([
+            'cpf' => preg_replace('/\D/', '', $cpf) //Remove os pontos e os traços
+        ]);
+
+    }
+
 }

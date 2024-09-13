@@ -71,7 +71,7 @@ class LoginController extends Controller
         // recuperar o usuario autenticado do banco de dados
         $user = User::where('id', Auth::id())->first();
         // atualiza o campo last_active_at do usuario com a data e hora atuais
-         $user->update(['last_active_at' => null]);
+         $user->update(['last_active_at' => Carbon::now()]);
 
         // Deslogar o usuario
         Auth::logout();
